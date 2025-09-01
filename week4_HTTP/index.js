@@ -1,21 +1,31 @@
-// creating an HTTP Server(express)
-
-
 const express = require("express");
+
 const app = express();
 
-
 const users = [{
-    name: "John",
+    name:"John",
     kidneys: [{
         healthy: false
     }]
 }];
 
+app.get("/", function(req, res) {
+    const johnkidneys = users[0].kidneys;
+    const numberofkidneys = johnkidneys.length;
+    const numberofhealthy = 0;
+    for(i = 0; i<johnkidneys; i++){
+        if(johnkidneys[i].healthy){
+            numberofhealthy = numberofhealthy + 1;
+        }
+    }
 
-app.get("/", function(req, res){
-    const johnK = users[0].kidneys;
-    console.log(johnK);
-})
+    const numberofunhealthy = numberofkidneys - numberofhealthy;
+    res.json({
+        johnkidneys,
+        numberofhealthy,
+        numberofunhealthy
+
+    })
+});
 
 app.listen(3000);
