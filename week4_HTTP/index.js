@@ -28,4 +28,14 @@ app.get("/", function(req, res) {
     })
 });
 
+app.post("/", function(req, res){
+    const ishealthy = req.body.healthy;
+    users[0].kidneys.push({
+        healthy: ishealthy
+    })
+    res.json({
+        msg: "Done!"
+    })
+})
+
 app.listen(3000);
